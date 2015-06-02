@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+    <record model = "workflow" id="wf_mymod">
+            <field name="name">mymod.wrkf</field>
+            <field name="osv">copywriting.plan</field>
+            <field name="on_create">True</field>
+        </record>
+        <record model = "workflow.activity" id="act_nea">
+            <field name= "wkf_id"  ref = "wf_mymod"/>
+            <field name= "flow_start">True</field>
+            <field name = "name">New</field>
+            <field name = "kind" >function</field>
+            <field name = "action">wrkf_open()</field>
+        </record>
+        <record model = "workflow.activity" id="act_cea">
+            <field name="wkf_id" ref="wf_mymod" />
+            <field name="name">Confirm</field>
+            <field name="kind">function</field>
+            <field name="action">wrkf_solving()</field>
+         </record>
+        <record model = "workflow.activity" id="act_dea">
+            <field name="wkf_id" ref="wf_mymod" />
+            <field name="name">Done</field>
+            <field name="kind">function</field>
+            <field name = "action">wrkf_solved()</field>
+         </record>
+
+
+        <record model="workflow.transition" id="Transilvania1">
+           <field name="act_from" ref="act_nea"/>
+            <field name="act_to" ref="act_cea"/>
+            <field name="signal">wrkf_solving</field>
+       </record>
+        <record model="workflow.transition" id="Transilvania2">
+           <field name="act_from" ref="act_cea" />
+            <field name="act_to" ref="act_dea"/>
+            <field name="signal">wrkf_solved</field>
+       </record>
+    </data>
+</openerp>

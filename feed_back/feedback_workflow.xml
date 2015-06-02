@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="workflow" id="wkf_plan_carry">
+            <field name="name">quality_plan.wkf</field>
+            <field name="osv">quality.plan</field>
+            <field name="on_create">True</field>
+        </record>
+
+    </data>
+</openerp>

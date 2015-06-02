@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+        <menuitem id='menu_pm' name='Project Management' sequence="100"/>
+        <menuitem name="Project Development Plan" parent="menu_pm" id="menu_pdp" sequence="50" />
+        <record model="ir.actions.act_window" id="action_pdp_pd">
+            <field name="name">Proposal for Development</field>
+            <field name="res_model">proposal.development</field>
+            <field name="view_model">tree,form</field>
+            <field name="help" type="html">
+            	<p class="oe_view_nocontent_create">
+               		 There is not proposal.
+            	</p>
+             </field>
+         </record>
+
+        <record id="auto_creator" model="project.project">
+            <field name="name">Development Task</field>
+            <field name="bool">True</field>
+        </record>
+        <menuitem name="Proposal for Development" parent="menu_pdp" id="menu_pdp_pd" action="action_pdp_pd" sequence="1"/>
+        <record model="ir.ui.view" id="proposal_tree_view">
+            <field name="name">Proposal for Development Tree View</field>
+            <field name="model">proposal.development</field>
+            <field name="arch" type="xml">
+         	   <tree string="Orders Tree"  >
+                   <field name="from_whom" />
+                   <field name="topic" />
+                   <field name="sending_date" />
+                   <field name="suggestion" />
+	   		   </tree>
+            </field>
+        </record>
+         <record model="ir.ui.view" id="proposal_form_view">
+            <field name="name">Proposal Form View</field>
+            <field name="model">proposal.development</field>
+            <field name="arch" type="xml">
+             <form string="Import" version="7.0">
+              <sheet>
+                <group>
+                   <field name="from_whom" />
+                   <field name="topic" />
+                   <field name="sending_date" />
+                   <field name="suggestion" />
+                </group>
+               </sheet>
+              <div class="oe_chatter">
+                       <field name="message_follower_ids" widget="mail_followers"/>
+                       <field name="message_ids" widget="mail_thread"/>
+              </div>
+              </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="problem_form_view">
+            <field name="name">Problem Task Form View</field>
+            <field name="model">problem.task</field>
+            <field name="arch" type="xml">
+              <form string="Import" version="7.0">
+               <header>
+                     <button name="wrkf_new" string ="Open" state="open"/>
+                     <button name="wrkf_solving" string ="Solving" state="solving"/>
+                     <button name="wrkf_solved" string ="Solved" state="solved"/>
+                     <field name="state" widget="statusbar" statusbar_visible="open,solving,solveds"/>
+               </header>
+              <sheet>
+                <group>
+                   <field name="from_whom" />
+                   <field name="topic" />
+                   <field name="sending_date" />
+                   <field name="problem" />
+                </group>
+               </sheet>
+              <div class="oe_chatter">
+                       <field name="message_follower_ids" widget="mail_followers"/>
+                       <field name="message_ids" widget="mail_thread"/>
+              </div>
+              </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="problem_tree_view">
+            <field name="name">Problem Task Tree View</field>
+            <field name="model">problem.task</field>
+            <field name="arch" type="xml">
+         	   <tree string="Orders Tree"  >
+                   <field name="from_whom" />
+                   <field name="topic" />
+                   <field name="sending_date" />
+                   <field name="problem" />
+	   		   </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_pdp_p">
+            <field name="name">Problems</field>
+            <field name="res_model">problem.task</field>
+            <field name="view_model">tree,form</field>
+            <field name="help" type="html">
+            	<p class="oe_view_nocontent_create">
+               		 There is not problems.
+            	</p>
+             </field>
+         </record>
+        <menuitem name="Problems" parent="menu_pdp" id="menu_pdp_p" action="action_pdp_p" sequence="1"/>
+         <record id="action_pdp_dp" model="ir.actions.act_window">
+            <field name="name">Development Plan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.project</field>
+            <field name="view_type">form</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a contact in your address book.
+              </p><p>
+                OpenERP helps you easily track all activities related to
+                a supplier: discussions, history of purchases,
+                documents, etc.
+              </p>
+            </field>
+        </record>
+        <menuitem name="Development Plan" parent="menu_pdp" id="menu_pdp_dp" action="action_pdp_dp" sequence="1"/>
+    </data>
+</openerp>

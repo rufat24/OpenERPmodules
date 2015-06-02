@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+    <record model = "workflow" id="wrkfl_mymod">
+            <field name="name">mymod.wrkfl</field>
+            <field name="osv">optimization.part</field>
+            <field name="on_create">True</field>
+        </record>
+        <record model = "workflow.activity" id="act_n1">
+            <field name= "wkf_id"  ref = "wrkfl_mymod"/>
+            <field name= "flow_start">True</field>
+            <field name = "name">New</field>
+            <field name = "kind" >function</field>
+            <field name = "action">wrkfl_new()</field>
+        </record>
+        <record model = "workflow.activity" id="act_c1">
+            <field name="wkf_id" ref="wrkfl_mymod" />
+            <field name="name">Confirm</field>
+            <field name="kind">function</field>
+            <field name="action">wrkfl_confirm()</field>
+         </record>
+        <record model = "workflow.activity" id="act_d1">
+            <field name="wkf_id" ref="wrkfl_mymod" />
+            <field name="name">Done</field>
+            <field name="kind">function</field>
+            <field name = "action">wrkfl_done()</field>
+         </record>
+
+
+        <record model="workflow.transition" id="Tr1">
+           <field name="act_from" ref="act_n1"/>
+            <field name="act_to" ref="act_c1"/>
+            <field name="signal">wrkfl_confirm</field>
+       </record>
+        <record model="workflow.transition" id="Tr2">
+           <field name="act_from" ref="act_c1" />
+            <field name="act_to" ref="act_d1"/>
+            <field name="signal">wrkfl_done</field>
+       </record>
+    </data>
+</openerp>

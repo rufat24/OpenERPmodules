@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+		<!-- Top Menu Item -->
+        <menuitem id='menu_xcart' name='X-Cart' sequence="100"/>
+        <menuitem name="Shop" parent="menu_xcart" id="menu_xcart_shop" sequence="50" />
+        <record model="ir.actions.act_window" id="action_didedin">
+            <field name="name">Categories</field>
+            <field name="res_model">xcart.catalogs</field>
+            <field name="view_model">tree</field>
+            <field name="help" type="html">
+            	<p class="oe_view_nocontent_create">
+               		 There is not product.
+            	</p>
+             </field>
+         </record>
+        <menuitem name="Categories" parent="menu_xcart_shop" id="menu_xcart_pipi_tree" action="action_didedin" sequence="1"/>
+
+
+        <record model="ir.actions.act_window" id="action_company">
+            <field name="name">Company Stores</field>
+            <field name="res_model">company.stores</field>
+            <field name="view_model">tree,form</field>
+            <field name="help" type="html">
+            	<p class="oe_view_nocontent_create">
+               		 There is not product.
+            	</p>
+             </field>
+         </record>
+        <menuitem name="Company Stores" parent="menu_xcart_shop" id="menu_campany_store" action="action_company" sequence="1"/>
+
+        <record model="ir.ui.view" id="company_form_view">
+            <field name="name">Store View</field>
+            <field name="model">company.stores</field>
+            <field name="arch" type="xml">
+         	   <form string="Import" version="7.0">
+                   <sheet>
+                     <field name="cprovider_id" />
+       				 <field name="magazin_name"/>
+	   		   </sheet>
+               </form>
+            </field>
+        </record>
+
+       <record model="ir.ui.view" id="company_store_tree_view">
+            <field name="name">Store Tree View</field>
+            <field name="model">company.stores</field>
+            <field name="arch" type="xml">
+         	   <tree string="Orders Tree"  >
+                       <field name="cprovider_id" />
+       				 <field name="magazin_name"/>
+	   		   </tree>
+            </field>
+         </record>
+
+        <record model="ir.ui.view" id="shop_tree_view">
+            <field name="name">Products Tree View</field>
+            <field name="model">xcart.catalogs</field>
+            <field name="arch" type="xml">
+         	   <tree string="Orders Tree"  >
+                     <field name="catalog" />
+       				 <field name="amount"/>
+	   		   </tree>
+            </field>
+        </record>
+
+       <record model="ir.ui.view" id="xcart_shop">
+           <field name="name">Shop Form View</field>
+           <field name="model">xcart.shop</field>
+           <field name="arch" type="xml">
+              <form string="Import" version="7.0">
+                    <header>
+                        <newline/>
+                        <button type="object" name="import_orders" string="Import Orders" icon="terp-sale"/>
+                        <button type="object" name="import_products" string="Import Products" icon="gtk-sort-ascending"/>
+                        <button type="object" name="import_customers" string="Import Customers" icon="terp-personal"/>
+                        <button type="object" string="Import Providers" name="import_providers" icon="terp-personal+"/>
+                        <button type="object" string="Import Catalog" name="import_catalog" icon="gtk-indent"/>
+                        <button type="object" string="Import Returns" name="import_returns" icon="gtk-sort-descending"/>
+                    </header>
+                  <group>
+                     <field name="shop_name" />
+                     <field name="url"/>
+                     <field name="key"/>
+                  </group>
+              </form>
+           </field>
+       </record>
+
+       <!--Action for products-->
+	   <record model="ir.actions.act_window" id="action_xcart_shop_form">
+           <field name="name">Shop</field>
+           <field name="res_model">xcart.shop</field>
+           <field name="view_model">tree,form</field>
+           <field name="help" type="html">
+               <p class="oe_view_nocontent_create">
+                    There is not product.
+               </p>
+           </field>
+       </record>
+       <menuitem name="Shop" parent="menu_xcart_shop" id="menu_xcart_shop_form" action="action_xcart_shop_form" sequence="1"/>
+
+
+
+    </data>
+</openerp>

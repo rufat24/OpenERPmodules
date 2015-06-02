@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--Top menu items-->
+        <menuitem id="menu_promotion project"  parent="development_plan.menu_pm" name="Promotion Project" sequence="40" />
+        <menuitem id="menu_project_optimization"  parent="development_plan.menu_pm" name="Project Optimization" sequence="40" />
+
+        <record model="ir.actions.act_window" id="action_advertising_campaign">
+		     <field name="name">Advertising Campaign</field>
+			 <field name="res_model">advertising.campaign</field>
+             <field name="view_type">form</field>
+			 <field name="view_mode">tree,form</field>
+              <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create advertising campaign...
+              </p>
+            </field>
+         </record>
+		<menuitem name="Advertising Campaign" parent="menu_promotion project" id="menu_ad_campaign" action="action_advertising_campaign"/>
+
+
+          <record model="ir.ui.view" id="ad_campaign_form_view">
+            <field name="name">advertising.campaign.form</field>
+            <field name="model">advertising.campaign</field>
+            <field name="arch" type="xml">
+         	   <form string="Advertising Campaign" version="7.0"  >
+                   <header>
+                     <button name="woffy_new" string ="New" state="new4"/>
+                     <button name="woffy_confirm" string ="Confirm" state="confirm4"/>
+                     <field name="state" widget="statusbar" statusbar_visible="new4,confirm4"/>
+                   </header>
+                   <sheet>
+
+                        <group>
+                            <field name="target" default_focus="1" style="width: 60%%" />
+                             <label for="start_date" string="Date"/>
+                            <div >
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </div>
+                            <field name="budget"/>
+                       </group>
+                   <notebook>
+                      <page string="Targets">
+                          <field name="target_line">
+                          <tree string="Targets"  editable="bottom">
+                          <field name="target_id"/>
+                          <field name="values"/>
+                          <field name="actual_values"/>
+                          </tree>
+                          </field>
+                      </page>
+                  </notebook>
+                   </sheet>
+               </form>
+            </field>
+        </record>
+
+
+         <!--tree view for ad campaign-->
+        <record model="ir.ui.view" id="ad_campaign_tree_view">
+        <field name="name">advertising.campaign.tree</field>
+        <field name="model">advertising.campaign</field>
+        <field name="arch" type="xml">
+         	   <tree string="Advertising Campaign">
+                   <field name="target"/>
+                  <field name="start_date"/>
+                  <field name="end_date"/>
+               </tree>
+            </field>
+        </record>
+
+         <record id="partner_service_prom_form" model="ir.ui.view">
+             <field name="name">target.services.form</field>
+             <field name="model">target.services</field>
+             <field name="arch" type="xml">
+             <group>
+              <field name="name"/>
+              <field name="desc"/>
+              </group>
+             </field>
+         </record>
+
+          <record model="ir.actions.act_window" id="action_campaign_plan">
+		     <field name="name">Campaign Plan</field>
+			 <field name="res_model">plan.campaign</field>
+             <field name="view_type">form</field>
+			 <field name="view_mode">tree,form</field>
+              <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create campaign plan...
+              </p>
+            </field>
+         </record>
+		<menuitem name="Campaign Plan" parent="menu_promotion project" id="menu_campaign_plan" action="action_campaign_plan"/>
+
+
+          <record model="ir.ui.view" id="campaign_plan_form_view">
+            <field name="name">plan.campaign.form</field>
+            <field name="model">plan.campaign</field>
+            <field name="arch" type="xml">
+         	   <form string="Campaign Plan" version="7.0"  >
+                   <sheet>
+                        <group>
+                            <field name="ad_campaign" default_focus="1" style="width: 60%%" />
+                       </group>
+                   <notebook>
+                      <page string="Terms">
+                          <field name="action_line">
+                          <tree string="Terms"  editable="bottom">
+                          <field name="action_id"/>
+                          <field name="channel"/>
+                          <field name="cost"/>
+                          </tree>
+                          </field>
+                      </page>
+                  </notebook>
+                   </sheet>
+               </form>
+            </field>
+        </record>
+
+
+        <!--Copaign result!-->
+
+
+
+
+         <!--tree view for ad campaign!-->
+        <record model="ir.ui.view" id="plan_campaign_tree_view">
+        <field name="name">plan.campaign.tree</field>
+        <field name="model">plan.campaign</field>
+        <field name="arch" type="xml">
+         	   <tree string="Advertising Campaign">
+                  <field name="ad_campaign"/>
+               </tree>
+            </field>
+        </record>
+
+         <record id="action_service_prom_form" model="ir.ui.view">
+             <field name="name">action.services.form</field>
+             <field name="model">action.services</field>
+             <field name="arch" type="xml">
+             <group>
+              <field name="name"/>
+              <field name="desc"/>
+              </group>
+             </field>
+        </record>
+
+        <record id="action_pp_cfu" model="ir.actions.act_window">
+            <field name="name">Campaign Follow-Up</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">marketing.campaign.workitem</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a workitem.
+              </p>
+            </field>
+        </record>
+        <menuitem name="Campaign Follow-Up" parent="menu_promotion project" id="menu_pp_cfu" action="action_pp_cfu" sequence="1"/>
+
+        <record id="action_pp_s" model="ir.actions.act_window">
+            <field name="name">Segments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">marketing.campaign.segment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a segment.
+              </p>
+            </field>
+        </record>
+        <menuitem name="Segments" parent="menu_promotion project" id="menu_pp_s" action="action_pp_s" sequence="1"/>
+
+        <record id="action_pp_c" model="ir.actions.act_window">
+            <field name="name">Campaigns</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">marketing.campaign</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a campaign.
+              </p>
+            </field>
+        </record>
+        <menuitem name="Campaigns" parent="menu_promotion project" id="menu_pp_c" action="action_pp_c" sequence="1"/>
+
+
+        <!--Project Optimization-->
+        <record model="ir.actions.act_window" id="action_optimization_campaign">
+		     <field name="name">Content Optimization</field>
+			 <field name="res_model">optimization.plan</field>
+             <field name="view_type">form</field>
+			 <field name="view_mode">tree,form</field>
+              <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create content optimization...
+              </p>
+            </field>
+         </record>
+		<menuitem name="Content Optimization" parent="menu_project_optimization" id="menu_optim_campaign" action="action_optimization_campaign"/>
+
+        <record model="ir.ui.view" id="content_optim_form_view">
+            <field name="name">optimization.plan.form</field>
+            <field name="model">optimization.plan</field>
+            <field name="arch" type="xml">
+         	   <form string="Content Optimization" version="7.0">
+                   <header>
+                     <button name="wkf_confirm" string ="Confirm" state="confirm"/>
+                     <button name="wkf_done" string ="Done" state="done"/>
+                     <field name="state" widget="statusbar" statusbar_visible="new,confirm,done"/>
+                   </header>
+                   <sheet>
+                     <group>
+                       <field name="responsible"/>
+                       <field name="start_date"/>
+                       <field name="finish_date"/>
+                     </group>
+                       <separator string="A List of Links and Sections to Optimization"/>
+                       <field name="link_list"/>
+                       <separator string="Keywords"/>
+                       <field name="keywords"/>
+                       <separator string="External Links"/>
+                       <field name="external_links"/>
+
+                   </sheet>
+               </form>
+            </field>
+        </record>
+          <record model="ir.ui.view" id="content_optim_tree_view">
+                            <field name="name">Content Optimization</field>
+                            <field name="model">optimization.plan</field>
+                            <field name="arch" type="xml">
+                               <tree string="Content Optimization">
+                                   <field name="responsible"/>
+                                   <field name="start_date"/>
+                                   <field name="finish_date"/>
+                               </tree>
+
+                           </field>
+            </record>
+
+
+        <record model="ir.actions.act_window" id="action_copywriting">
+		     <field name="name">Copywriting</field>
+			 <field name="res_model">copywriting.plan</field>
+             <field name="view_type">form</field>
+			 <field name="view_mode">tree,form</field>
+              <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new copywriting plan...
+              </p>
+            </field>
+         </record>
+		<menuitem name="Copywriting" parent="menu_project_optimization" id="menu_copy" action="action_copywriting"/>
+
+        <record model="ir.ui.view" id="copywriting_form_view">
+            <field name="name">copywriting.form</field>
+            <field name="model">copywriting.plan</field>
+            <field name="arch" type="xml">
+         	   <form string="Copywriting" version="7.0">
+                   <header>
+                     <button name="wrkf_confirm" string ="Confirm" state="confirm1"/>
+                     <button name="wrkf_done" string ="Done" state="done1"/>
+                     <field name="state" widget="statusbar" statusbar_visible="new1,confirm1,done1"/>
+                   </header>
+                   <sheet>
+                      <group>
+                       <field name="copywriter"/>
+                       <field name="start_date"/>
+                       <field name="finish_date"/>
+                       <field name="title"/>
+                       <field name="type"/>
+                      </group>
+                       <separator string="List of Keywords"/>
+                       <field name="keywords_list"/>
+                      <group>
+                       <field name="percent"/>
+                      </group>
+                        <separator string="Request for Optimization"/>
+                       <field name="optimization_request"/>
+
+                   </sheet>
+               </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="copywriting_tree_view">
+                            <field name="name">copywriting.tree</field>
+                            <field name="model">copywriting.plan</field>
+                            <field name="arch" type="xml">
+                               <tree string="Copywriting">
+                                   <field name="copywriter"/>
+                                   <field name="start_date"/>
+                                   <field name="finish_date"/>
+                                   <field name="title"/>
+                                   <field name="type"/>
+                               </tree>
+                           </field>
+            </record>
+
+
+        <record model="ir.actions.act_window" id="action_optimization_part">
+		     <field name="name">Optimization of Technical Part</field>
+			 <field name="res_model">optimization.part</field>
+             <field name="view_type">form</field>
+			 <field name="view_mode">tree,form</field>
+              <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new optimization of technical part...
+              </p>
+            </field>
+         </record>
+		<menuitem name="Optimization of Technical Part" parent="menu_project_optimization" id="menu_optim" action="action_optimization_part"/>
+
+        <record model="ir.ui.view" id="optimization_part_form_view">
+            <field name="name">optimization.part.form</field>
+            <field name="model">optimization.part</field>
+            <field name="arch" type="xml">
+         	   <form string="Copywriting" version="7.0">
+                   <header>
+                     <button name="wrkfl_confirm" string ="Confirm" state="confirm2"/>
+                     <button name="wrkfl_done" string ="Done" state="done2"/>
+                     <field name="state" widget="statusbar" statusbar_visible="new2,confirm2,done2"/>
+                   </header>
+
+                   <sheet>
+
+                    <group>
+                       <field name="responsible"/>
+                       <field name="start_date"/>
+                       <field name="finish_date"/>
+                       <separator string ="Works"/>
+                    </group>
+                      <group>
+                       <field name="opt_descr"/>
+                       <field name="opt_site"/>
+                       <field name="opt_tags"/>
+                   </group>
+
+                 </sheet>
+               </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="optim_part_tree_view">
+                            <field name="name">optimization.part.tree</field>
+                            <field name="model">optimization.part</field>
+                            <field name="arch" type="xml">
+                               <tree string="">
+                                   <field name="responsible"/>
+                                   <field name="start_date"/>
+                                   <field name="finish_date"/>
+                                   <field name="opt_descr"/>
+                                   <field name="opt_site"/>
+                                   <field name="opt_tags"/>
+                               </tree>
+                           </field>
+            </record>
+
+
+    </data>
+</openerp>

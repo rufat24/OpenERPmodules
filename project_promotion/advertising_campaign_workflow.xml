@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+    <record model = "workflow" id="woffy_mymy">
+            <field name="name">mymod.woffy</field>
+            <field name="osv">advertising.campaign</field>
+            <field name="on_create">True</field>
+        </record>
+        <record model = "workflow.activity" id="actn">
+            <field name= "wkf_id"  ref = "woffy_mymy"/>
+            <field name= "flow_start">True</field>
+            <field name = "name">New</field>
+            <field name = "kind" >function</field>
+            <field name = "action">woffy_new()</field>
+        </record>
+        <record model = "workflow.activity" id="actc">
+            <field name="wkf_id" ref="woffy_mymy" />
+            <field name="name">Confirm</field>
+            <field name="kind">function</field>
+            <field name="action">woffy_confirm()</field>
+         </record>
+
+        <record model="workflow.transition" id="Transvis1">
+           <field name="act_from" ref="actn"/>
+            <field name="act_to" ref="actc"/>
+            <field name="signal">woffy_confirm</field>
+        </record>
+    </data>
+</openerp>

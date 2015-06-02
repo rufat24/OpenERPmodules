@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <menuitem  id="menu_feed_back" name="FeedBack" parent="development_plan.menu_pm"/>
+
+        <record id="plan_carry_form" model="ir.ui.view">
+            <field name="name">plan.carry.form</field>
+            <field name="model">plan.carry</field>
+            <field name="arch" type="xml">
+                <form string="Plan" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1> <label string="Plan"/> </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="type"/>
+                                <field name="group"/>
+                            </group>
+                            <group>
+                                <field  name="start_date"/>
+                                <field name="finish_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="holding_of_voting_form" model="ir.ui.view">
+            <field name="name">voting.tasks.form</field>
+            <field name="model">voting.tasks</field>
+            <field name="arch" type="xml">
+                <form string="Tasks for Holding of Voting" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1> <label string="Tasks for Holding of Voting"/> </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="responsible"/>
+                                <field name="name"/>
+                                <field name="group"/>
+                            </group>
+                            <group>
+                                <field  name="start_date"/>
+                                <field name="finish_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Answers">
+                                <field name="answer_line">
+                                <tree string="answers"  editable="bottom">
+                                    <field name="answer_id"/>
+                                </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="task_for_surveys_form" model="ir.ui.view">
+            <field name="name">question.tasks.form</field>
+            <field name="model">question.tasks</field>
+            <field name="arch" type="xml">
+                <form string="Tasks for Surveys" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1> <label string="Tasks for Surveys/"/> </h1><br/>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="responsible"/>
+                                <field name="name"/>
+                                <field name="group"/>
+                            </group>
+                            <group>
+                                <field  name="start_date"/>
+                                <field name="finish_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Answers">
+                                <field name="question_line">
+                                <tree string="questions"  editable="bottom">
+                                    <field name="question_id"/>
+                                </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="plan_carry_tree" model="ir.ui.view">
+            <field name="name">plan.carry.tree</field>
+            <field name="model">plan.carry</field>
+            <field name="arch" type="xml">
+                <tree string="Plan">
+                    <field name="type"/>
+                    <field name="group"/>
+                    <field name="start_date"/>
+                    <field name="finish_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="holding_of_voting_tree" model="ir.ui.view">
+            <field name="name">voting.tasks.tree</field>
+            <field name="model">voting.tasks</field>
+            <field name="arch" type="xml">
+                <tree string="Holding of Voting" version="7.0">
+                    <field name="responsible"/>
+                    <field name="name"/>
+                    <field name="group"/>
+                    <field  name="start_date"/>
+                    <field name="finish_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="task_for_surveys_tree" model="ir.ui.view">
+            <field name="name">question.tasks.tree</field>
+            <field name="model">question.tasks</field>
+            <field name="arch" type="xml">
+                <tree string="Task for Surveys" version="7.0">
+                    <field name="responsible"/>
+                    <field name="name"/>
+                    <field name="group"/>
+                    <field  name="start_date"/>
+                    <field name="finish_date"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_plan_carry" model="ir.actions.act_window">
+             <field name="name">Plan</field>
+			 <field name="res_model">plan.carry</field>
+			 <field name="view_type">form</field>
+             <field name="view_mode">tree,form</field>
+             <field name="help" type="html">
+            	<p class="oe_view_nocontent_create">
+               		 Click to add new plan.
+            	</p>
+             </field>
+        </record>
+        <menuitem name="Plan" parent="menu_feed_back" id="menu_plan_carry" action="action_plan_carry"/>
+
+        <record id="action_hold_vote" model="ir.actions.act_window">
+             <field name="name">Holding of Voting</field>
+			 <field name="res_model">voting.tasks</field>
+			 <field name="view_type">form</field>
+             <field name="view_mode">tree,form</field>
+             <field name="help" type="html">
+            	<p class="oe_view_nocontent_create">
+               		 Click to add new record.
+            	</p>
+             </field>
+        </record>
+        <menuitem name="Tasks for Holding of Voting" parent="menu_feed_back" id="menu_hold_vote" action="action_hold_vote"/>
+
+        <record id="action_task_surveys" model="ir.actions.act_window">
+             <field name="name">Task for Surveys</field>
+			 <field name="res_model">question.tasks</field>
+			 <field name="view_type">form</field>
+             <field name="view_mode">tree,form</field>
+             <field name="help" type="html">
+            	<p class="oe_view_nocontent_create">
+               		 Click to add new task for survey.
+            	</p>
+             </field>
+        </record>
+        <menuitem name="Tasks for Surveys" parent="menu_feed_back" id="menu_task_survers" action="action_task_surveys"/>
+
+    </data>
+</openerp>

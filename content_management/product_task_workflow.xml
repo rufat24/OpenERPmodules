@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+    <record model = "workflow" id="wkf_mymod">
+            <field name="name">mymod.wkf</field>
+            <field name="osv">product.task</field>
+            <field name="on_create">True</field>
+        </record>
+        <record model = "workflow.activity" id="act_new">
+            <field name= "wkf_id"  ref = "wkf_mymod"/>
+            <field name= "flow_start">True</field>
+            <field name = "name">New</field>
+            <field name = "kind" >function</field>
+            <field name = "action">wkf_new()</field>
+        </record>
+        <record model = "workflow.activity" id="act_done">
+            <field name="wkf_id" ref="wkf_mymod" />
+            <field name="name">Done</field>
+            <field name="kind">function</field>
+            <field name = "action">wkf_done()</field>
+         </record>
+
+        <record model="workflow.transition" id="Transition1">
+           <field name="act_from" ref="act_new" />
+            <field name="act_to" ref="act_done"/>
+            <field name="signal">wkf_done</field>
+       </record>
+    </data>
+</openerp>

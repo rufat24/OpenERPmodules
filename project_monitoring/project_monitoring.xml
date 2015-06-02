@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+        <menuitem id='menu_project_monitoring' name='Project Monitoring' sequence="100"/>
+        <menuitem name="Statistics" parent="menu_project_monitoring" id="menu_project_monitoring_statistics" sequence="50" />
+
+        <record id="action_providers_sik" model="ir.actions.act_window">
+            <field name="name">Providers Statistics</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">xcart.providers</field>
+            <field name="view_type">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">tree,graph</field>
+            <field name="help" type="html">
+               <p class="oe_view_nocontent_create">
+                    There is not product.
+               </p>
+           </field>
+        </record>
+        <menuitem name="Providers Statistics" parent="menu_project_monitoring_statistics" id="menu_project_monitoring_statistics_providers" action="action_providers_sik" sequence="1"/>
+
+
+    <record model="ir.ui.view" id="xcart_providers_view_tree">
+           <field name="name">xcart.providers.tree</field>
+           <field name="model">xcart.providers</field>
+           <field name="arch" type="xml">
+                 <tree string="Providers Statistics">
+                      <field name="provider_id"/>
+                      <field name="registration_date" />
+                </tree>
+            </field>
+        </record>
+    <record model="ir.ui.view" id="xcart_providers_view_graph">
+           <field name="name">xcart.providers.graph</field>
+           <field name="model">xcart.providers</field>
+           <field name="type">graph</field>
+           <field name="arch" type="xml">
+                 <graph string="Providers Statistics">
+                      <field name="registration_date" group="True"/>
+                      <field name="provider_id" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+</data>
+</openerp>

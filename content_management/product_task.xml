@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+
+        <menuitem name="Content Management" parent="development_plan.menu_pm" id="menu_pm_cm" sequence="50" />
+         <record id="action_pm_cm_pct" model="ir.actions.act_window">
+            <field name="name">Products Catalog Tasks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.task</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add catalog tasks.
+              </p>
+            </field>
+        </record>
+        <menuitem name="Products Catalog Tasks" parent="menu_pm_cm" id="menu_pm_cm_pct" action="action_pm_cm_pct" sequence="1"/>
+        <record model="ir.ui.view" id="product_tasks_form_view">
+            <field name="name">Products Catalog Tasks Form View</field>
+            <field name="model">product.task</field>
+            <field name="arch" type="xml">
+              <form string="Products Catalog Tasks" version="7.0">
+              <header>
+                <button name="wkf_new" string ="New" state="new"/>
+                <button name="wkf_done" string ="Done" state="done"/>
+                <field name="state" widget="statusbar" statusbar_visible="new,done"/>
+              </header>
+             <sheet>
+              <group>
+               <group>
+                   <field name="responsible" />
+                  </group>
+               <group>
+                     <field name="deadline"/>
+               </group>
+              </group>
+                <separator string="Task"/>
+                <field name="task" />
+             </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_tasks_tree_view">
+            <field name="name">Products Catalog Tasks Tree View</field>
+            <field name="model">product.task</field>
+            <field name="arch" type="xml">
+         	   <tree string=""  >
+                    <field name="responsible" />
+                    <field name="deadline"/>
+                    <field name="task" />
+       	   	   </tree>
+            </field>
+        </record>
+
+        <record id="action_plan_for_dev" model="ir.actions.act_window">
+            <field name="name">Development Plan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">plan.development</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create development plan.
+              </p>
+            </field>
+        </record>
+        <menuitem name="Development Plan" parent="menu_pm_cm" id="menu_action_plan_for_dev" action="action_plan_for_dev" sequence="1"/>
+
+        <record model="ir.ui.view" id="_plan_for_dev_form_view">
+            <field name="name">Development Plan Form View</field>
+            <field name="model">plan.development</field>
+            <field name="arch" type="xml">
+              <form string="Development Plan" version="7.0">
+             <sheet>
+              <group>
+                <field name="month" />
+              </group>
+                <notebook>
+                  <page string="Plan">
+                      <field name="dev_line">
+                      <tree string="TreeForm"  editable="bottom">
+                      <field name="category_id"/>
+                      <field name="amount"/>
+                      <!--field name="contract_id"/-->
+                      </tree>
+                      </field>
+                  </page>
+                    <page string="Tasks">
+                      <field name="dev_line1">
+                      <tree string="TreeForm"  editable="bottom">
+                      <field name="category_id"/>
+                      <field name="responsible"/>
+                      <field name="done"/>
+                      </tree>
+                      </field>
+                  </page>
+                 </notebook>
+                 <group class="oe_subtotal_footer oe_right">
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="total_done"/>
+                                        <button name="button_update" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                                    </div>
+                                    <field name="total_done" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                 </group>
+                <div class="oe_clear"/>
+               </sheet>
+            </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

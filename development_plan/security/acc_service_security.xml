@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record model="res.groups" id="group_web_project_manager">
+            <field name="name">Web Project Manager</field>
+        </record>
+
+        <!-- accounting reports  Access Rules -->
+
+    </data>
+</openerp>

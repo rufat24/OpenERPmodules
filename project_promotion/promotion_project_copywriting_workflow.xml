@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+    <record model = "workflow" id="wrkf_mymod">
+            <field name="name">mymod.wrkf</field>
+            <field name="osv">copywriting.plan</field>
+            <field name="on_create">True</field>
+        </record>
+        <record model = "workflow.activity" id="act_n">
+            <field name= "wkf_id"  ref = "wrkf_mymod"/>
+            <field name= "flow_start">True</field>
+            <field name = "name">New</field>
+            <field name = "kind" >function</field>
+            <field name = "action">wrkf_new()</field>
+        </record>
+        <record model = "workflow.activity" id="act_c">
+            <field name="wkf_id" ref="wrkf_mymod" />
+            <field name="name">Confirm</field>
+            <field name="kind">function</field>
+            <field name="action">wrkf_confirm()</field>
+         </record>
+        <record model = "workflow.activity" id="act_d">
+            <field name="wkf_id" ref="wrkf_mymod" />
+            <field name="name">Done</field>
+            <field name="kind">function</field>
+            <field name = "action">wrkf_done()</field>
+         </record>
+
+
+        <record model="workflow.transition" id="Trans1">
+           <field name="act_from" ref="act_n"/>
+            <field name="act_to" ref="act_c"/>
+            <field name="signal">wrkf_confirm</field>
+       </record>
+        <record model="workflow.transition" id="Trans2">
+           <field name="act_from" ref="act_c" />
+            <field name="act_to" ref="act_d"/>
+            <field name="signal">wrkf_done</field>
+       </record>
+    </data>
+</openerp>
